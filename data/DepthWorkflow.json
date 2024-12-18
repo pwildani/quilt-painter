@@ -1,0 +1,91 @@
+{
+  "3": {
+    "inputs": {
+      "image": "INPUT_IMG.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "9": {
+    "inputs": {
+      "model": "depth_anything_v2_vitl_fp16.safetensors"
+    },
+    "class_type": "DownloadAndLoadDepthAnythingV2Model",
+    "_meta": {
+      "title": "DownloadAndLoadDepthAnythingV2Model"
+    }
+  },
+  "10": {
+    "inputs": {
+      "da_model": [
+        "9",
+        0
+      ],
+      "images": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "DepthAnything_V2",
+    "_meta": {
+      "title": "Depth Anything V2"
+    }
+  },
+  "12": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "upscale_method": "bilinear",
+      "keep_proportion": true,
+      "divisible_by": 2,
+      "width_input": 0,
+      "height_input": 0,
+      "crop": "disabled",
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJ",
+    "_meta": {
+      "title": "Resize Image"
+    }
+  },
+  "14": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "upscale_method": "bilinear",
+      "keep_proportion": true,
+      "divisible_by": 2,
+      "crop": "disabled",
+      "image": [
+        "10",
+        0
+      ],
+      "get_image_size": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJ",
+    "_meta": {
+      "title": "Resize To Original"
+    }
+  },
+  "17": {
+    "inputs": {
+      "images": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "SaveImageWebsocket",
+    "_meta": {
+      "title": "SaveImageWebsocket"
+    }
+  }
+}

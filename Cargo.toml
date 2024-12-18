@@ -1,0 +1,53 @@
+[package]
+name = "quilt_painter"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+# RGB+D to Quilt
+name = "painter"
+path = "src/bin/painter.rs"
+
+[[bin]]
+# RGB to RGB+D
+name = "depthmap"
+path = "src/bin/depthmap.rs"
+
+[[bin]]
+# Combined RGB to RGB+D to Quilt
+name = "depthpainter" 
+path = "src/bin/depthpainter.rs"
+
+[features]
+captions = ["dep:rusttype", "dep:ab_glyph"]
+
+[dependencies]
+rusqlite = "0.29.0"
+walkdir = "2.4.0"
+image = "0.24.6"
+nalgebra = "0.32.2"
+clap = { version = "4.3.0", features = ["derive"] }
+lazy_static = "1.4.0"
+itertools = "0.13.0"
+log = "0.4.22"
+env_logger = "0.11.5"
+rayon = "1.10.0"
+ureq = { version = "2.10.1", features = ["json"] }
+tungstenite = { version = "0.21", features = ["native-tls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+url = "2.4"
+ureq_multipart = "1.1.1"
+mozjpeg = "0.10.10"
+rusttype = { version = "0.9.3", optional = true }
+ab_glyph = { version = "0.2.23", optional = true }
+kamadak-exif = "0.6.1"
+sha2 = "0.10.8"
+
+[dev-dependencies]
+approx = "0.5.1"
+
+[profile.release]
+debug="full"
+opt-level=3
+lto="thin"
